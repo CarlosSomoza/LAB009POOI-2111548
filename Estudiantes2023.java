@@ -84,6 +84,8 @@ public class Estudiantes2023 {
                 if (partesNombre1.length > 1 && partesNombre2.length > 1) {
                     String apellido1 = partesNombre1[1];
                     String apellido2 = partesNombre2[1];
+                 return apellido1.compareToIgnoreCase(apellido2);
+                } else {   
 
 
     public void modificarEstudiante(Estudiante estudianteExistente, Estudiante nuevoEstudiante) {
