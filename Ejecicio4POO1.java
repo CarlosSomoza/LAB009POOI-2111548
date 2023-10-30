@@ -13,9 +13,7 @@ import java.util.Scanner;
  * @author carlo
  */
 public class Ejecicio4POO1 {
-    
     public static void main(String[] args) throws Exception {
-        
         Estudiantes2023 estudiantes2023 = new Estudiantes2023();
         Scanner scanner = new Scanner(System.in);
 
@@ -77,10 +75,10 @@ public class Ejecicio4POO1 {
                         //Apellido
                         System.out.print("Ingrese el apellido del estudiante a buscar: ");
                         String apellidoBuscar = scanner.nextLine();
-                        Estudiante estudiantePorApellido = estudiantes2023.buscarPorApellido(apellidoBuscar);
+                        Estudiante estudianteApellido = estudiantes2023.buscarApellido(apellidoBuscar);
 
-                        if (estudiantePorApellido != null) {
-                            System.out.println("Datos del estudiante:\n" + estudiantePorApellido.toString());
+                        if (estudianteApellido != null) {
+                            System.out.println("Datos del estudiante:\n" + estudianteApellido.toString());
                         } else {
                             System.out.println("No hay estudiantes registrados con el apellido " + apellidoBuscar);
                         }
@@ -132,7 +130,7 @@ public class Ejecicio4POO1 {
                     estudiantes2023.modificarApellidosMayuscula();
                     System.out.println("****** MODIFICACION ESTUDIANTE MINUSCULA ********");
                     System.out.println("Apellidos en Minúsculas:");
-                    for (Estudiante estudiante : estudiantes2023.getEstudiantes()) {
+                    for (Estudiante estudiante : estudiantes2023.listarEstudiantes()) {
                         System.out.println(estudiante.getCodigo() + " " + estudiante.getNombre() + " " + estudiante.getCiclo() + " " + estudiante.getPension());
                     }
                     break;
@@ -140,16 +138,16 @@ public class Ejecicio4POO1 {
                 case 6:
                     // LISTA DE ESTUDIANTES
                     System.out.println("****** LISTA DE ESTUDIANTES ********");
-                    for (Estudiante estudiante : estudiantes2023.getEstudiantes()) {
+                    for (Estudiante estudiante : estudiantes2023.listarEstudiantes()) {
                         System.out.println(estudiante.getCodigo() + " " + estudiante.getNombre() + " " + estudiante.getCiclo() + " " + estudiante.getPension());
                     }
                     break;
 
                 case 7:
                     // ESTUDIANTES ORDENADOS POR APELLIDOS
-                    estudiantes2023.listarEstudiantesPorApellido();
+                    estudiantes2023.listarEstudiantesApellido();
                     System.out.println("****** ESTUDIANTES ORDENADOS POR APELLIDOS ********");
-                    for (Estudiante estudiante : estudiantes2023.getEstudiantes()) {
+                    for (Estudiante estudiante : estudiantes2023.listarEstudiantes()) {
                         System.out.println(estudiante.getCodigo() + " " + estudiante.getNombre() + " " + estudiante.getCiclo() + " " + estudiante.getPension());
                     }
                     break;
@@ -158,7 +156,7 @@ public class Ejecicio4POO1 {
                     // ESTUDIANTES ORDENADOS POR PENSION ASCENDENTE
                     estudiantes2023.listarEstudiantesPorPensionAscendente();
                     System.out.println("****** ESTUDIANTES ORDENADOS POR PENSION ASCENDENTE ********");
-                    for (Estudiante estudiante : estudiantes2023.getEstudiantes()) {
+                    for (Estudiante estudiante : estudiantes2023.listarEstudiantes()) {
                         System.out.println(estudiante.getCodigo() + " " + estudiante.getNombre() + " " + estudiante.getCiclo() + " " + estudiante.getPension());
                     }
                     break;
@@ -181,5 +179,4 @@ public class Ejecicio4POO1 {
         } while (opcion != 10);
     }
 }
-    }
 
