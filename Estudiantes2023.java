@@ -48,36 +48,28 @@ public class Estudiantes2023 {
         }
     }
 }
-
-    public Estudiante buscar(int codigo) {
-    for (Estudiante estudiante : estudiantes) {
-        if (estudiante.getCodigo() == codigo) {
-            return estudiante; // Devuelve el estudiante si se encuentra
+  // Generar codigo a estudiante nuevo
+    private int obtenerSiguienteCodigoDisponible() {
+        if (!estudiantes.isEmpty()) {
+            int ultimoCodigo = estudiantes.get(estudiantes.size() - 1).getCodigo();
+            return ultimoCodigo + 1; 
+        } else {
+            return 100; 
         }
     }
-    return null; // Devuelve null si el estudiante no se encuentra
-}
 
-    public void modificarApellidosEnMinusculas(int codigo, String nuevosApellidos) {
-        Estudiante estudiante = buscar(codigo);
-        if (estudiante != null) {
-            estudiante.setApellidos(nuevosApellidos);
+    //Busqueda por apellido
+    public Estudiante buscarApellido(String apellido) {
+        for (Estudiante estudiante : estudiantes) {
+            String[] partesNombre = estudiante.getNombre().split(" ");
+            if (partesNombre.length > 1) {
+                if (partesNombre[1].equalsIgnoreCase(apellido)) {
+                    return estudiante;
+                }
+            }
         }
+        return null;
     }
-    
-    public double calcularTotalPensiones() {
-    double totalPensiones = 0.0;
-    for (Estudiante estudiante : estudiantes) {
-        totalPensiones += estudiante.getPension();
-    }
-    return totalPensiones;
-}
-
-    public List<Estudiante> getEstudiantesPorApellidos() {
-    List<Estudiante> estudiantesPorApellidos = new ArrayList<>(estudiantes); // Copia de la lista original
-    Collections.sort(estudiantesPorApellidos, (e1, e2) -> e1.getApellidos().compareTo(e2.getApellidos()));
-    return estudiantesPorApellidos;
-}
 
     // M�todos para manipular el archivo de texto
     private void readFromInputStream(InputStream inputStream) throws IOException {
