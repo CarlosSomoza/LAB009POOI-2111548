@@ -85,13 +85,6 @@ public class Estudiantes2023 {
                     String apellido1 = partesNombre1[1];
                     String apellido2 = partesNombre2[1];
 
-                    return apellido1.compareToIgnoreCase(apellido2);
-                } else {
-                    return e1.getNombre().compareToIgnoreCase(e2.getNombre());
-                }
-            }
-        });
-    }
 
     public void modificarEstudiante(Estudiante estudianteExistente, Estudiante nuevoEstudiante) {
         int index = estudiantes.indexOf(estudianteExistente);
