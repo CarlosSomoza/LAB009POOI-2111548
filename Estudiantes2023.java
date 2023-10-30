@@ -74,6 +74,59 @@ public class Estudiantes2023 {
         return null;
     }
 
+   public void listarEstudiantesApellido() {
+      Collections.sort(estudiantes, new Comparator<Estudiante>() {
+            @Override
+            public int compare(Estudiante e1, Estudiante e2) {
+                String[] partesNombre1 = e1.getNombre().split(" ");
+                String[] partesNombre2 = e2.getNombre().split(" ");
+
+                if (partesNombre1.length > 1 && partesNombre2.length > 1) {
+                    String apellido1 = partesNombre1[1];
+                    String apellido2 = partesNombre2[1];
+
+                    return apellido1.compareToIgnoreCase(apellido2);
+                } else {
+                    return e1.getNombre().compareToIgnoreCase(e2.getNombre());
+                }
+            }
+        });
+    }
+
+    public void modificarEstudiante(Estudiante estudianteExistente, Estudiante nuevoEstudiante) {
+        int index = estudiantes.indexOf(estudianteExistente);
+        if (index >= 0) {
+            estudiantes.set(index, nuevoEstudiante);
+            guardarArchivo();
+        }
+    }
+    public void modificarApellidosMayuscula() {
+        for (Estudiante estudiante : estudiantes) {
+            String[] partesNombre = estudiante.getNombre().split(" ");
+            if (partesNombre.length > 1) {
+                partesNombre[1] = partesNombre[1].toLowerCase(); 
+                estudiante.setNombre(String.join(" ", partesNombre));
+            }
+        }
+        guardarArchivo(); 
+    }
+public void listarEstudiantesPorPensionAscendente() {
+      Collections.sort(estudiantes, new Comparator<Estudiante>() {
+            @Override
+            public int compare(Estudiante e1, Estudiante e2) {
+                return Double.compare(e1.getPension(), e2.getPension());
+            }
+        });
+        listarEstudiantes();
+    }
+    public double sumaTotalPensiones() {
+        double suma = 0;
+        for (Estudiante estudiante : estudiantes) {
+            suma += estudiante.getPension();
+        }
+        return suma;
+    }
+
     // M�todos para manipular el archivo de texto
     private void readFromInputStream(InputStream inputStream) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
@@ -85,19 +138,16 @@ public class Estudiantes2023 {
         br.close();
     }
 
-	// M�todo que a�adir a los estudiantes del archivo .txt en el arrayList estudiantes.
+    // M�todo que a�adir a los estudiantes del archivo .txt en el arrayList estudiantes.
     private void createStudent(StringTokenizer st){
-int codigo = Integer.parseInt(st.nextToken().trim());
-String nombre = st.nextToken().trim();
-int ciclo = Integer.parseInt(st.nextToken().trim());
-double pension = Double.parseDouble(st.nextToken().trim());
-Estudiante estudiante = new Estudiante(codigo, nombre, ciclo, pension);
-adicionar(estudiante);
-
-
-    }
-
-    // M�todos para manipular el archivo de texto
+        int codigo = Integer.parseInt(st.nextToken().trim());
+        String nombre = st.nextToken().trim();
+        int ciclo = Integer.parseInt(st.nextToken().trim());
+        double pension = Double.parseDouble(st.nextToken().trim());
+        Estudiante estudiante = new Estudiante(codigo, nombre, ciclo, pension);
+        adicionar(estudiante);
+    }	
+// M�todos para manipular el archivo de texto
     private void cargarArchivo() {
         try {
             File file = new File("./src/ejecicio4poo1/estudiantes.txt");
@@ -112,4 +162,24 @@ adicionar(estudiante);
             JOptionPane.showMessageDialog(null, "Se produjo un error= " + x);
         }
     }
+    public void guardarArchivo() {
+        try {
+            FileWriter fileWriter = new FileWriter("./src/ejecicio4poo1/estudiantes.txt");
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+
+            for (Estudiante estudiante : estudiantes) {
+                printWriter.println(
+                    estudiante.getCodigo() + "," + 
+                    estudiante.getNombre() + "," +
+                    estudiante.getCiclo() + "," +
+                    estudiante.getPension()
+                );
+            }
+
+            printWriter.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar el archivo: " + e.getMessage());
+        }
+    }
+
 }
