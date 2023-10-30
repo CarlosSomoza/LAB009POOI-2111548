@@ -26,28 +26,31 @@ public class Estudiantes2023 {
        estudiantes.remove(estudiante);
         guardarArchivo();
     }
-//
-	
-    public boolean eliminarEstudiante(int codigo) {
-    for (Estudiante estudiante : estudiantes) {
-        if (estudiante.getCodigo() == codigo) {
-            estudiantes.remove(estudiante);
-            return true; // Estudiante eliminado con éxito
-        }
-    }
-    return false; // No se encontró el estudiante a eliminar
-}
 
-   public void verTodosLosEstudiantes() {
-    if (estudiantes.isEmpty()) {
-        System.out.println("No hay estudiantes registrados.");
-    } else {
-        System.out.println("Lista de estudiantes:");
-        for (Estudiante estudiante : estudiantes) {
-            System.out.println(estudiante);
+
+   public Estudiante obtener(int pos) {
+        if (pos >= 0 && pos < estudiantes.size()) {
+            return estudiantes.get(pos);
         }
+        return null;
     }
-}
+    
+    public Estudiante buscar(int codigo) {
+        for (Estudiante estudiante : estudiantes) {
+            if (estudiante.getCodigo() == codigo) {
+                return estudiante;
+            }
+        }
+        return null;
+    }
+    
+    public int tamano() {
+        return estudiantes.size();
+    }
+    
+    public ArrayList<Estudiante> listarEstudiantes() {
+        return estudiantes;
+    }
   // Generar codigo a estudiante nuevo
     private int obtenerSiguienteCodigoDisponible() {
         if (!estudiantes.isEmpty()) {
