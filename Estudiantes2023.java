@@ -8,35 +8,26 @@ import javax.swing.*;
 import java.io.*;
 
 public class Estudiantes2023 {
-    private static ArrayList<Estudiante> estudiantes;
-
-    static Iterable<Estudiante> getEstudiante() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    private ArrayList<Estudiante> estudiantes;
 
     public Estudiantes2023() {
         estudiantes = new ArrayList<>();
         cargarArchivo();
     }
 
-    public boolean modificarEstudiante(int codigo, String nombre, String apellidos, String ciclo, double pension) {
-    for (Estudiante estudiante : estudiantes) {
-        if (estudiante.getCodigo() == codigo) {
-            estudiante.setNombre(nombre);
-            estudiante.setApellidos(apellidos);
-            estudiante.setCiclo(ciclo);
-            estudiante.setPension(pension);
-            return true; // Estudiante modificado con éxito
-        }
-    }
-    return false; // No se encontró el estudiante a modificar
-}
-    
     public void adicionar(Estudiante estudiante) {
-        estudiantes.add(estudiante);   
-        System.out.println(estudiante);
+        int nuevoCodigo = obtenerSiguienteCodigoDisponible(); 
+        estudiante.setCodigo(nuevoCodigo);
+        estudiantes.add(estudiante);
+        guardarArchivo();
     }
-
+    
+    public void eliminar(Estudiante estudiante) {
+       estudiantes.remove(estudiante);
+        guardarArchivo();
+    }
+//
+	
     public boolean eliminarEstudiante(int codigo) {
     for (Estudiante estudiante : estudiantes) {
         if (estudiante.getCodigo() == codigo) {
